@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/codegangsta/cli"
 	"io/ioutil"
 	"log"
 	"os"
@@ -48,5 +49,17 @@ func Init() {
 }
 
 func main() {
-	Init()
+	app := cli.NewApp()
+	app.Name = "guld"
+	app.Usage = "Use it as you use git"
+	app.Commands = []cli.Command{
+		{
+			Name:  "init",
+			Usage: "Create an empty guld repository",
+			Action: func(c *cli.Context) {
+				Init()
+			},
+		},
+	}
+	app.Run(os.Args)
 }
