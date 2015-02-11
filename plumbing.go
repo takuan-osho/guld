@@ -7,10 +7,13 @@ import (
 	"strconv"
 )
 
-func MakeHashObjectString(content string, filetype string) string {
+func GetStringsForHashObject(content string, filetype string) (contentWithHeader, hashObjectString string) {
 	header := filetype + " " + strconv.Itoa(len(content)) + "\000"
-	store := header + content
+	contentWithHeader = header + content
+
 	hash := sha1.New()
-	io.WriteString(hash, store)
-	return hex.EncodeToString(hash.Sum(nil))
+	io.WriteString(hash, contentWithHeader)
+	hashObjectString = hex.EncodeToString(hash.Sum(nil))
+
+	return
 }

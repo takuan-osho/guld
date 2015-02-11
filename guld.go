@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/codegangsta/cli"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/codegangsta/cli"
 )
 
 const (
