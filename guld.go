@@ -1,8 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
-	"log"
 	"os"
 
 	"github.com/codegangsta/cli"
@@ -13,52 +11,26 @@ const (
 	BaseDir         = "." + BaseDirBaseName
 )
 
-func Init() {
-	err := os.Mkdir(BaseDir, 0755)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = os.Chdir(BaseDir)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	initFiles := []string{"HEAD", "config", "description", "index"}
-	for _, fileName := range initFiles {
-		err = ioutil.WriteFile(fileName, nil, 0644)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	initDirs := []string{"branches", "hooks", "info", "objects", "refs"}
-	for _, dirName := range initDirs {
-		err = os.Mkdir(dirName, 0755)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	initSubDirs := []string{"objects/info", "objects/pack", "refs/head", "refs/tags"}
-	for _, subDirName := range initSubDirs {
-		err = os.MkdirAll(subDirName, 0755)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-
 func main() {
 	app := cli.NewApp()
 	app.Name = "guld"
 	app.Usage = "Use it as you use git"
 	app.Commands = []cli.Command{
 		{
-			Name:  "init",
-			Usage: "Create an empty guld repository",
+			Name:        "init",
+			Usage:       "Create an empty guld repository",
+			Description: "Create an empty guld repository",
 			Action: func(c *cli.Context) {
 				Init()
+			},
+		},
+		{
+			Name:        "hash-object",
+			Usage:       "Computes the object ID value for an object",
+			Description: "Computes the object ID value for an object with specified type with the contents of the named",
+			Flags:       CmdHashObjectFlags,
+			Action: func(c *cli.Context) {
+				HashObjectAction(c)
 			},
 		},
 	}
