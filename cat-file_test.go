@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"reflect"
 	"testing"
 )
 
@@ -38,10 +39,36 @@ func TestCatFile(t *testing.T) {
 	}
 
 	testObject := CatFile(objectPath)
+
+	if testObject.Content != object.Content {
+		t.Errorf("Couldn't read object content")
+	}
+
+	if testObject.Type != object.Type {
+		t.Errorf("Couldn't read object type")
+	}
+
+	if testObject.Header != object.Header {
+		t.Errorf("Couldn't read object header")
+	}
+
 	if testObject.ContentWithHeader != object.ContentWithHeader {
-		os.Remove(objectPath)
-		os.Remove(objectDir)
-		os.Remove(tempDir)
+		t.Errorf("Couldn't read object content with header")
+	}
+
+	if testObject.ID != object.ID {
+		t.Errorf("Couldn't read object id")
+	}
+
+	if testObject.Dir != object.Dir {
+		t.Errorf("Couldn't read object directory value")
+	}
+
+	if testObject.Name != object.Name {
+		t.Errorf("Couldn't read object name")
+	}
+
+	if !reflect.DeepEqual(testObject.CompressedContent, object.CompressedContent) {
 		t.Errorf("Couldn't read object compressed content")
 	}
 
