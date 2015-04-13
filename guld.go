@@ -15,11 +15,13 @@ const (
 var (
 	WorkingDir = ""
 	RepoDir    = ""
+	ObjectDir  = ""
 )
 
 func main() {
 	WorkingDir, _ = os.Getwd()
 	RepoDir = filepath.Join(WorkingDir, BaseDir)
+	ObjectDir = filepath.Join(RepoDir, "objects")
 
 	app := cli.NewApp()
 	app.Name = "guld"
@@ -40,6 +42,15 @@ func main() {
 			Flags:       CmdHashObjectFlags,
 			Action: func(c *cli.Context) {
 				HashObjectAction(c)
+			},
+		},
+		{
+			Name:        "cat-file",
+			Usage:       "Provide content or type and size information for repository objects",
+			Description: "Provide content or type and size information for repository objects",
+			Flags:       CmdCatFileFlags,
+			Action: func(c *cli.Context) {
+				CatFileAction(c)
 			},
 		},
 	}
