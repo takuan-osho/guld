@@ -7,12 +7,12 @@ import (
 )
 
 func Init() {
-	err := os.Mkdir(BaseDir, 0755)
+	err := os.Mkdir(RepoDir, 0755)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = os.Chdir(BaseDir)
+	err = os.Chdir(RepoDir)
 	if err != nil {
 		log.Fatal(err)
 	}

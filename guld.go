@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"path/filepath"
 
 	"github.com/codegangsta/cli"
 )
@@ -11,7 +12,15 @@ const (
 	BaseDir         = "." + BaseDirBaseName
 )
 
+var (
+	WorkingDir = ""
+	RepoDir    = ""
+)
+
 func main() {
+	WorkingDir, _ = os.Getwd()
+	RepoDir = filepath.Join(WorkingDir, BaseDir)
+
 	app := cli.NewApp()
 	app.Name = "guld"
 	app.Usage = "Use it as you use git"
