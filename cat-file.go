@@ -51,7 +51,7 @@ func CatFile(filePath string) *HashObject {
 	r.Close()
 
 	object.ContentWithHeader = string(out.Bytes()[:])
-	re := regexp.MustCompile("(blob|tree|commit|tag)[\t\n\v\f\r ]([0-9]*)\\000(.*)")
+	re := regexp.MustCompile("(blob|tree|commit|tag)[\t\n\v\f\r ]([0-9]*)\\000([\\s\\S]*)")
 	group := re.FindStringSubmatch(object.ContentWithHeader)
 	object.Type = group[1]
 	object.Content = group[3]
