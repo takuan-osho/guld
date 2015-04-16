@@ -67,7 +67,7 @@ func HashObjectAction(c *cli.Context) {
 
 	if c.Bool("w") {
 		WriteHashObject(object, BaseDir)
-	} else {
-		fmt.Println(object.ID)
 	}
+
+	fmt.Println(object.ID)
 }
