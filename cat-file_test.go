@@ -10,7 +10,11 @@ import (
 )
 
 func TestCatFile(t *testing.T) {
-	content := "what is up, doc?"
+	content := `ホールは孔のマッチかっこうたちがセロを引きあげ窓たまし。それからまた生意気だたとして写真ございな。
+
+下手ましでんんはならではテープの生意気たちのままへもがぶがぶ気の毒たまして、そこじゃマッチへ置くれ気ましう。
+
+見つめすぎきみは虎が白いでて一番の孔の音げで出第一手団の話に笑っがいうまし。`
 	filetype := "blob"
 	object := NewHashObject(content, filetype)
 
