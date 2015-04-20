@@ -66,6 +66,9 @@ func CatFile(filePath string) *HashObject {
 }
 
 func CatFileAction(c *cli.Context) {
+	if len(c.Args()) <= 0 {
+		log.Fatalf("Input file whose content you want to watch ")
+	}
 	object := CatFile(filepath.Join(ObjectDir, c.Args()[0][:2], c.Args()[0][2:]))
 
 	if c.Bool("t") {
